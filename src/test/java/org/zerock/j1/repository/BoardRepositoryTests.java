@@ -1,14 +1,18 @@
 package org.zerock.j1.repository;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.test.annotation.Commit;
 import org.zerock.j1.domain.Board;
 
 import jakarta.transaction.Transactional;
@@ -83,6 +87,62 @@ public class BoardRepositoryTests {
   }
 
     @Test
+  public void testQuery1_1() {
+
+    java.util.List<Board> list = boardRepository.listTitle("1");
+
+    log.info("-----------------");
+    log.info(list.size());
+    log.info(list);
+
+  }
+
+  @Test
+  public void testQuery1_2() {
+
+    java.util.List<Object[]> list = boardRepository.listTitle2("1");
+
+    log.info("-----------------");
+    log.info(list.size());
+    
+    list.forEach(arr -> log.info(Arrays.toString(arr)));
+
+  }
+
+    @Test
+  public void testQuery1_3() {
+
+    Pageable pageable = PageRequest.of(0,10, Sort.by("bno").descending());
+
+    Page<Object[]> result = boardRepository.listTitle2("1",pageable);
+
+    log.info(result);
+
+  }
+
+  @Commit
+  @Transactional
+  @Test
+  public void testModify() {
+
+    Long bno = 100L;
+    String title ="Modified Title 100";
+
+    int count = boardRepository.modifyTitle(title, bno);
+
+    log.info("----------------" + count);
+  }
+
+  @Test
+  public void testNative(){
+
+    List<Object[]> result = boardRepository.listNative();
+
+    result.forEach(arr -> log.info(Arrays.toString(arr)));
+
+  }
+
+    @Test
   public void testQuery2() {
 
     Pageable pageable = PageRequest.of(
@@ -93,6 +153,13 @@ public class BoardRepositoryTests {
 
     log.info("-----------------");
     log.info(result);
+
+  }
+
+  @Test
+  public void testSearch1(){
+
+    boardRepository.search1();
 
   }
 
