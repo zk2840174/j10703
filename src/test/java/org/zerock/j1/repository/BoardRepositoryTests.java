@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.zerock.j1.domain.Board;
+import org.zerock.j1.dto.PageRequestDTO;
 
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
@@ -159,7 +160,43 @@ public class BoardRepositoryTests {
   @Test
   public void testSearch1(){
 
-    boardRepository.search1();
+    Pageable pageable = PageRequest.of(0,10, 
+        Sort.by("bno").descending());
+
+    Page<Board> result = boardRepository.search1("tw","1",pageable);
+
+    log.info(result.getTotalElements());
+
+    result.get().forEach(b -> log.info(b));
+  }
+
+  @Test
+  public void testListWithRcnt() {
+
+    List<Object[]> result = boardRepository.getListWithRcnt();
+
+    for (Object[] result2 : result) {
+      log.info(Arrays.toString(result2));
+    }
+  }
+
+  @Test
+  public void testListWithRcntSearch(){
+
+    Pageable pageable = PageRequest.of(0,10, 
+      Sort.by("bno").descending());
+
+    boardRepository.searchWithRcnt("tcw", "1", pageable);
+
+  }
+
+  @Test
+  public void test0706_1() {
+
+    PageRequestDTO pageRequest = new PageRequestDTO();
+
+    boardRepository.searchDTORcnt(pageRequest);
+
 
   }
 

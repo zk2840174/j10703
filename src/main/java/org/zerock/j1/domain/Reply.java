@@ -1,10 +1,11 @@
 package org.zerock.j1.domain;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,22 +14,25 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "tbl_todo2")
+@Table(name="t_reply")
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Getter
-public class Todo {
+@ToString(exclude = "board")
+public class Reply {
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long tno;
+  private Long rno;
 
-  @Column(length = 300, nullable = false)
-  private String title;
+  private String replyText;
 
-  public void changeTitle(String title){
-    this.title = title;
-  }
+  private String replyFile;
+
+  private String replyer;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  private Board board;
 
 }
