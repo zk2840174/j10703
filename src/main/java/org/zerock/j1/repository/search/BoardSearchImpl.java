@@ -150,7 +150,8 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
       }//end for
       query.where(searchBuilder);
     }
-    
+
+    this.getQuerydsl().applyPagination(pageable, query);
     query.groupBy(board);
 
     JPQLQuery<BoardListRcntDTO> listQuery = query.select(
@@ -167,7 +168,9 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
     log.info("-----------------------");
     log.info(list);
 
-    return null;
+    long totalCount = listQuery.fetchCount();
+
+    return new PageResponseDTO<>(list, totalCount, requestDTO);
 
   }
   
