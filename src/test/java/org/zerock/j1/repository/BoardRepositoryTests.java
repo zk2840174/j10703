@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.test.annotation.Commit;
 import org.zerock.j1.domain.Board;
 import org.zerock.j1.dto.BoardListRcntDTO;
+import org.zerock.j1.dto.BoardReadDTO;
 import org.zerock.j1.dto.PageRequestDTO;
 import org.zerock.j1.dto.PageResponseDTO;
 
@@ -204,4 +205,19 @@ public class BoardRepositoryTests {
 
   }
 
+  @Test
+  public void testReadOne() {
+    Long bno = 77L;
+
+    BoardReadDTO dto = boardRepository.readOne(bno);
+
+    log.info(dto);
+    log.info(dto.getRegDate());
+    log.info(dto.getModDate());
+    log.info(dto.getClass().getName());
+
+  }
+
 }
+
+
