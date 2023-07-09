@@ -26,43 +26,43 @@ public class ReplyRepositoryTests {
   @Autowired
   private ReplyService replyService;
 
-  @Test
-  public void insertOne(){
+  // @Test
+  // public void insertOne(){
 
-    Long bno = 100L;
+  //   Long bno = 100L;
 
-    Board board = Board.builder().bno(bno).build();
+  //   Board board = Board.builder().bno(bno).build();
 
-    Reply reply = Reply.builder()
-      .replyText("Reply....1")
-      .replyer("replyer00")
-      .board(board)
-      .build();
+  //   Reply reply = Reply.builder()
+  //     .replyText("Reply....1")
+  //     .replyer("replyer00")
+  //     .board(board)
+  //     .build();
 
-    replyRepository.save(reply);  
+  //   replyRepository.save(reply);  
 
-  }
+  // }
 
-  @Test
-  public void testInsertDummies() {
+  // @Test
+  // public void testInsertDummies() {
 
-    Long[] bnoArr = {99L, 96L, 92L, 84L, 81L};
+  //   Long[] bnoArr = {99L, 96L, 92L, 84L, 81L};
 
-    for (Long bno : bnoArr) {
+  //   for (Long bno : bnoArr) {
 
-      Board board = Board.builder().bno(bno).build();
+  //     Board board = Board.builder().bno(bno).build();
 
-      for(int i = 0; i < 50; i++){
+  //     for(int i = 0; i < 50; i++){
         
-        Reply reply = Reply.builder()
-          .replyText("Reply..."+bno+"--"+i)
-          .replyer("replyer"+i)
-          .board(board)
-          .build();
-        replyRepository.save(reply);
-      }
-    }//end for
-  }
+  //       Reply reply = Reply.builder()
+  //         .replyText("Reply..."+bno+"--"+i)
+  //         .replyer("replyer"+i)
+  //         .board(board)
+  //         .build();
+  //       replyRepository.save(reply);
+  //     }
+  //   }//end for
+  // }
 
   @Test
   public void testListBoard() {

@@ -29,24 +29,24 @@ public class BoardRepositoryTests {
   @Autowired
   private BoardRepository boardRepository;
 
-  @Test
-  public void testInsert(){
+  // @Test
+  // public void testInsert(){
 
-    for(int i = 0; i < 100; i++){
+  //   for(int i = 0; i < 100; i++){
 
-      Board board = Board.builder()
-      .title("Sample Title" +i)
-      .content("Sample Content" + i)
-      .writer("user" + (i %10))
-      .build();
+  //     Board board = Board.builder()
+  //     .title("Sample Title" +i)
+  //     .content("Sample Content" + i)
+  //     .writer("user" + (i %10))
+  //     .build();
 
-      boardRepository.save(board);
-
-
-    }
+  //     boardRepository.save(board);
 
 
-  }
+  //   }
+
+
+  // }
 
 
   @Test
